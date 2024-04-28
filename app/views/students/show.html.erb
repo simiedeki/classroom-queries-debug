@@ -1,3 +1,6 @@
+<h1>
+  Student #<%= @student.id %> details
+</h1>
 
 <div>
   <a href="/students">
@@ -72,6 +75,7 @@
 
 <h3>Course Load</h3>
 
+
 <form action="/insert_enrollment" method="post">
 
   <input type="hidden" id="student_id_box" name="query_student_id" value="<%= @student.id %>">
@@ -98,22 +102,12 @@
 <hr>
 
 
+
+
 <ul>
-    <% course = @enrollment.courses_id %>
-    
-    <% matching_courses = Courses.where({ :id => course }) %>
-    
-    <% The_Course = matching_courses.at(0) %>
-
-  
-
-
-  <% The_Course.each do |course1| %>
-  
+  <% @student.courses.each do |course| %>
     <li>
-      <a href="/courses/<%= @course.id %>">
-        <%= @course.title %>
-      </a>
+      <%= link_to course.title, course_path(course) %>
     </li>
   <% end %>
 </ul>

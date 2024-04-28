@@ -12,4 +12,5 @@
 class Course < ApplicationRecord
   has_many :enrollments
   belongs_to :department
+  has_many :students, through: :enrollments
 end

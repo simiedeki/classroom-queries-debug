@@ -7,8 +7,9 @@ class StudentsController < ApplicationController
 
   def show
     the_id = params.fetch("id")
-    @student = Student.where({:id => the_id })
+    @student = Student.find_by(id: the_id)
     
+  
     render template: "students/show"
   end
 
@@ -28,7 +29,7 @@ class StudentsController < ApplicationController
   end
 
   def update
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("id")
     @student = Student.where({ :id => the_id }).at(0)
 
     @student.first_name = params.fetch("query_first_name")
