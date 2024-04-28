@@ -6,40 +6,42 @@ class DepartmentsController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
-    @department = Department.where({:id => the_id })
+    the_id = params.fetch("id")
+    @department=Department.find_by(id: the_id)
+    render template: "departments/show"
+    
+  
 
-    render({ :template => "departments/show" })
+
   end
 
   def create
-    @department = Department.new
-    @department.name = params.fetch("query_name")
+  
+    d = Department.new
+    d.name = params.fetch("query_name")
+   
+  
 
-    if @department.valid?
-      @department.save
-      redirect_to("/departments", { :notice => "Department created successfully." })
-    else
-      redirect_to("/departments", { :notice => "Department failed to create successfully." })
-    end
+    d.save
+   
   end
 
   def update
-    the_id = params.fetch("path_id")
-    @department = Department.where({ :id => the_id }).at(0)
+    the_id = params.fetch("id")
+    department = @Department.where({ :id => the_id }).at(0)
 
-    @department.name = params.fetch("query_name")
+    department.name = params.fetch("query_name")
 
     if @department.valid?
       @department.save
-      redirect_to("/departments/#{@department.id}", { :notice => "Department updated successfully."} )
+      redirect_to("/departments/#{department.id}", { :notice => "Department updated successfully."} )
     else
-      redirect_to("/departments/#{@department.id}", { :alert => "Department failed to update successfully." })
+      redirect_to("/departments/#{department.id}", { :alert => "Department failed to update successfully." })
     end
   end
 
   def destroy
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("id")
     @department = Department.where({ :id => the_id }).at(0)
 
     @department.destroy

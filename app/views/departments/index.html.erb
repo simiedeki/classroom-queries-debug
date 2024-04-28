@@ -9,11 +9,10 @@
     <label for="name_box">
       Name
     </label>
-
     <input type="text" id="name_box" name="query_name">
   </div>
 
-  <button>
+  <button type="submit">
     Create department
   </button>
 </form>
@@ -22,30 +21,21 @@
 
 <table class="table" border="1">
   <tr>
-    <th>
-      ID
-    </th>
-
-    <th>
-      Name
-    </th>
-
-    <th>
-    </th>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Actions</th>
   </tr>
 
   <% @departments.each do |department| %>
     <tr>
       <td>
-        <%= @department.id %>
+        <%= department.id %>  <!-- Fixed: Use local variable 'department' -->
       </td>
-
       <td>
-        <%= @department.name %>
+        <%= department.name %>  <!-- Fixed: Use local variable 'department' -->
       </td>
-
       <td>
-        <a href="/departments/<%= @department.id %>">
+        <a href="/departments/<%= department.id %>">
           Show details
         </a>
       </td>

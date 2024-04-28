@@ -6,12 +6,13 @@ class StudentsController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
-    @student = Student.where({:id => the_id }).at(0)
-
-    render({ :template => "students/show" })
+    the_id = params.fetch("id")
+    @student = Student.where({:id => the_id })
+    
+    render template: "students/show"
   end
 
+  
   def create
     @student = Student.new
     @student.first_name = params.fetch("query_first_name")
